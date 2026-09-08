@@ -1,0 +1,26 @@
+# ── Python ────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.venv/
+venv/
+env/
+ENV/
+
+# ── Secrets & environment ─────────────────────────
+.env
+.env.local
+*.pem
+
+# ── Logs ──────────────────────────────────────────
+*.log
+server_stdout.log
+server_stderr.log
+
+# ── OS / Editor ───────────────────────────────────
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/
+*.swp

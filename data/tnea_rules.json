@@ -1,0 +1,62 @@
+[
+  {
+    "topic": "Nativity & Eligibility",
+    "keywords": ["nativity", "native", "eligibility", "eligible", "other state", "marks required", "minimum marks", "pass mark", "qualifying"],
+    "content": "Tamil Nadu native candidates who passed 8th to 12th standard in TN do not need a Nativity Certificate. Those who studied outside TN must produce a digitally signed e-Certificate. Minimum PCM average marks required: General Category (45%), BC/BCM/MBC/DNC/SC/SCA/ST (40%). Children of Central Govt employees or Public Sector employees serving in TN continuously for the past 5 years are also eligible."
+  },
+  {
+    "topic": "Mode of Selection & Tie-Breaking",
+    "keywords": ["selection", "inter-se merit", "tie break", "same marks", "rank list", "normalization", "how ranking is done"],
+    "content": "Selection is based on marks in Mathematics, Physics, and Chemistry reduced to 200 (Maths: 100, Physics: 50, Chemistry: 50). Marks from other boards are equated using normalization. If candidates have the same marks, the tie-break priority is: 1) Percentage in Mathematics, 2) Percentage in Physics, 3) Percentage in optional subject, 4) Total 12th standard marks, 5) Date of Birth (elder preferred), 6) Random number assigned."
+  },
+  {
+    "topic": "Rule of Reservation",
+    "keywords": ["reservation", "quota percentage", "community quota", "oc", "bc", "bcm", "mbc", "sc", "sca", "st", "rule of reservation"],
+    "content": "The TNEA rule of reservation is: Open Competition (OC): 31.00%, Backward Class (BC): 26.50%, Backward Class Muslim (BCM): 3.50%, Most Backward Class & Denotified Communities (MBC & DNC): 20.00%, Scheduled Caste (SC): 15.00%, Scheduled Caste Arunthathiyars (SCA): 3.00%, Scheduled Tribes (ST): 1.00%."
+  },
+  {
+    "topic": "7.5% Government School Quota",
+    "keywords": ["7.5", "government school", "govt school", "free seat", "fee waiver", "school quota"],
+    "content": "7.5% of seats are reserved on a preferential basis for students who studied 6th to 12th standard continuously in State Government Schools. The State Government completely absorbs all expenses including Tuition Fees, Hostel Fees, and Development Fees for these students."
+  },
+  {
+    "topic": "First Graduate Concession",
+    "keywords": ["first graduate", "fg", "first generation", "tuition fee concession", "graduate scholarship"],
+    "content": "A tuition fee concession is granted to the first graduate in a family attending counseling. It requires an e-Certificate from the Head Quarters Deputy Tahsildar and a joint declaration. If an applicant's brother or sister has already availed this concession for professional courses, the applicant is NOT eligible."
+  },
+  {
+    "topic": "AICTE Tuition Fee Waiver (TFW)",
+    "keywords": ["tfw", "aicte", "tuition fee waiver", "income limit", "poor"],
+    "content": "The AICTE TFW scheme applies to Self-Financing Colleges and Self-Supporting courses in Aided Colleges, covering up to 5% of the sanctioned intake. It is available only to sons and daughters of parents whose annual income from all sources is less than Rs. 8.0 lakhs."
+  },
+  {
+    "topic": "Post Matric Scholarship",
+    "keywords": ["post matric", "sc st scholarship", "dalit scholarship", "christian convert"],
+    "content": "Post Matric Scholarship is granted to SC/SCA/ST candidates and SC/SCA converted Christians whose parental annual income is less than Rs. 2,50,000/- from all sources. Eligible candidates must submit income certificates to the college where they get admitted."
+  },
+  {
+    "topic": "Special Reservation (Ex-Servicemen & Differently Abled)",
+    "keywords": ["ex-servicemen", "military", "army", "differently abled", "pwd", "disabled", "disability", "special reservation", "blind", "deaf"],
+    "content": "There are 150 seats reserved for Sons/Daughters of Ex-Servicemen (requires discharge certificates and ID card). 5% of seats are reserved for Persons with Benchmark Disabilities across 21 categories (requires Medical Certificate from a District Medical Board of 3 doctors; individual doctor certificates are invalid)."
+  },
+  {
+    "topic": "Sports Quota",
+    "keywords": ["sports", "sports quota", "eminent sports", "athlete", "tournament", "national", "international", "medal"],
+    "content": "500 seats are reserved for Eminent Sports Persons. Selection is based purely on sports achievement marks, not PCM cutoffs. Only achievements from the last 4 academic years (June 2022 to May 2026) are considered. Gold at International Level gets 1000 marks, National gets 190 marks, State gets 95 marks. School Zonal Level or CBSE Cluster Level competitions are NOT awarded marks."
+  },
+  {
+    "topic": "Marine & Mining Engineering Rules",
+    "keywords": ["marine", "mining", "navy", "sea", "underground", "ship"],
+    "content": "For Marine Engineering: Must pass with a 60% average in PCM and a minimum of 50% in English (10th or 12th). Maximum age is 25. Minimum height 157 cm, weight 48 kg. Normal color vision required. The IMU CET is mandatory. For Mining Engineering: As per the Mines Act 1952, female candidates cannot be employed in underground mines."
+  },
+  {
+    "topic": "Vocational Stream Candidates",
+    "keywords": ["vocational", "group code", "practical", "vocational stream"],
+    "content": "2% of Government seats are reserved for HSC Vocational Stream candidates. Their marks are reduced to 200 (Maths/Physics/Chemistry: 100 marks + Vocational subject theory & practical: 100 marks). Counseling and ranking are conducted separately for vocational candidates."
+  },
+  {
+    "topic": "Counselling Procedure & Options",
+    "keywords": ["counselling", "procedure", "how to apply", "choice filling", "allotment", "tentative", "accept and upward", "decline", "reporting"],
+    "content": "Online counselling happens in 4 stages: 1. Choice Filling (3 days), 2. Tentative Allotment, 3. Confirmation (within 2 days), 4. Reporting to College/TFC. Options during confirmation: 'Accept & Join', 'Accept & Upward' (wait for a better choice in your list), 'Decline & Upward', 'Decline & Move to next round', or 'Decline & Quit'."
+  }
+]

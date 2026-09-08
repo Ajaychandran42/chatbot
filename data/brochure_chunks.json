@@ -1,0 +1,77 @@
+[
+  {
+    "id": "eligibility_nativity",
+    "section": "eligibility",
+    "content": "Tamil Nadu candidates who studied VIII-XII in Tamil Nadu schools are eligible without a nativity certificate. Tamil Nadu natives who studied some of those years outside the state need a digitally signed nativity certificate. Children of Central/State Government employees posted in Tamil Nadu for the past 5 continuous years, and other-state candidates who studied VIII-XII in Tamil Nadu, are also eligible under Open Competition."
+  },
+  {
+    "id": "eligibility_marks",
+    "section": "eligibility",
+    "content": "Minimum HSC average in Maths, Physics and Chemistry combined: General category 45%, Backward Class/Backward Class Muslim 40%, MBC & DNC 40%, SC/SCA/ST 40%. Vocational-stream candidates need the same minimum averages combining their related subject with vocational theory and practicals. Improvement exam marks from 2006 onward are not counted."
+  },
+  {
+    "id": "eligibility_marine_mining",
+    "section": "eligibility",
+    "content": "Marine Engineering requires at least 60% average in Physics, Chemistry, Maths and English combined, minimum 50% in English, and clearing IMU's Common Entrance Test (CET). It also has age (max 25), height (min 157cm), weight (min 48kg) and normal color vision requirements. Mining Engineering has restrictions for female candidates under the Mines Act 1952 and Coal Mines Regulation 1957 regarding underground and night shift work."
+  },
+  {
+    "id": "reservation_percentages",
+    "section": "reservation",
+    "content": "Seats are reserved by community: Open Competition 31%, Backward Class 26.5%, Backward Class Muslim 3.5%, Most Backward Class & Denotified Communities 20%, Scheduled Caste 15%, Scheduled Caste Arunthathiyar 3%, Scheduled Tribe 1% — totaling 100%. An additional 7.5% preferential reservation applies across all categories for students who studied 6th-12th standard entirely in Tamil Nadu Government schools."
+  },
+  {
+    "id": "reservation_certificates",
+    "section": "reservation",
+    "content": "Only Tamil Nadu native candidates get communal reservation. Community certificates must be permanent card or digitally signed e-certificate, issued before the application deadline, from the correct authority: Revenue Divisional Officer/Sub-Collector for ST, Tahsildar of native taluk for SC/SCA, and Deputy Tahsildar for BC/BCM/MBC/DNC. Certificates from other states, or without proper documentation, mean the application defaults to Open Competition."
+  },
+  {
+    "id": "special_reservation_categories",
+    "section": "special_reservation",
+    "content": "Special reservation categories (Tamil Nadu natives only): Sons/Daughters of Ex-Servicemen (150 total seats across university/govt/self-financing colleges), Persons with Benchmark Disabilities (5% of seats, 21 listed disability categories with specific medical certification), and Eminent Sports Persons (500 seats, ranked by achievement marks from international/national/state/district level competitions over the last 4 years)."
+  },
+  {
+    "id": "special_reservation_disability",
+    "section": "special_reservation",
+    "content": "Disability categories include blindness, low vision, hearing impairment, locomotor disability, cerebral palsy, autism, intellectual disability, mental illness, and several others. Certification requires a District Medical Board (minimum 3 doctors) — individual doctor certificates are not accepted. Certain branches (Mining, Marine, most Computer Science variants) have branch-specific suitability rules for different disabilities."
+  },
+  {
+    "id": "mode_of_selection",
+    "section": "mode_of_selection",
+    "content": "Merit is based on marks reduced to 200 (Maths 100, Physics 50, Chemistry 50). Marks from non-Tamil-Nadu boards are normalized against the Tamil Nadu State Board's highest scorer in each subject. Tie-breaks are decided in order: Maths %, Physics %, optional subject %, overall 12th-standard %, date of birth (elder preferred), then a random number (higher preferred). Overall and community-wise rank lists are published on the official TNEA portal."
+  },
+  {
+    "id": "vocational_sandwich_integrated",
+    "section": "mode_of_selection",
+    "content": "2% of government seats are reserved for HSC Vocational stream candidates, with separate ranking and counseling, and 5% of vocational seats reserved for differently-abled candidates. Sandwich courses (5-year duration, combining morning practical training with evening classes) are offered in Mechanical, EEE and Production Engineering at PSG College of Technology. The Integrated 5-year M.Tech in Computer Science and Engineering is offered at select self-financing colleges."
+  },
+  {
+    "id": "fee_concessions",
+    "section": "fee_concession",
+    "content": "Students admitted under the 7.5% Government School reservation get full tuition/hostel/development fee waiver from the state. First Graduate Tuition Fee Concession applies to students who are the first graduate in their family (only one sibling can claim this per family). The AICTE Tuition Fee Waiver Scheme covers up to 5% of seats in self-financing colleges for families earning under Rs. 8 lakh/year. Post-Matric Scholarship is available for SC/SCA/ST candidates with family income under Rs. 2.5 lakh/year."
+  },
+  {
+    "id": "registration_documents",
+    "section": "registration_procedure",
+    "content": "Registration requires: mobile number, email ID, 10th and +2 mark sheets, school history from 6th-12th standard, community/caste details, Aadhaar number, parent income details, and a payment method for the registration fee. Registration fee is Rs. 500 for OC/BC/BCM/MBC&DNC candidates and Rs. 250 for SC/SCA/ST candidates, payable via card, net banking, UPI, or demand draft to 'The Secretary, TNEA'."
+  },
+  {
+    "id": "certificate_upload_list",
+    "section": "certificate_upload",
+    "content": "After registration, candidates must upload: 10th mark sheet, HSC +1 and +2 mark sheets, Transfer Certificate, government school study proof (if claiming 7.5% quota), Permanent Community Certificate (for reserved categories), Nativity Certificate (if applicable), Income Certificate (if applicable), First Graduate Certificate and Declaration (if applicable), Sri Lankan Tamil Refugee Certificate (if applicable), and special reservation supporting documents (Ex-servicemen discharge certificate, disability medical certificate, or sports achievement certificates) as relevant."
+  },
+  {
+    "id": "counseling_procedure",
+    "section": "counseling_procedure",
+    "content": "Counseling happens online in multiple rounds. Candidates are grouped and called by rank. Each round has 4 stages: Choice Filling (3 days to list college/branch preferences in priority order), Tentative Allotment, Confirmation, and Reporting/Fee Payment. Choice order matters — allotment follows the candidate's preferred order matched against their rank and the available seat matrix."
+  },
+  {
+    "id": "counseling_confirmation_options",
+    "section": "counseling_procedure",
+    "content": "When allotted a seat, a candidate must choose within 2 days: 'Accept and Join' (finalize and report to college), 'Accept and Upward' (keep this seat but wait for a better choice in the same round), 'Decline and Upward' (reject but wait for a better choice), 'Decline and Move to Next Round' (skip and try again next round), or 'Decline and Quit' (exit counseling entirely). Failing to confirm in time moves the candidate to the next round automatically."
+  },
+  {
+    "id": "counseling_fee_reporting",
+    "section": "counseling_procedure",
+    "content": "Candidates choosing 'Accept and Join' must report to the college within 5 days and pay fees (exempted for 7.5% government-school-quota, First Graduate, and Post-Matric Scholarship recipients). Candidates choosing 'Accept and Upward' report instead to the nearest TFC, pay fees there, and submit original certificates to hold their seat while waiting for a better allotment; certificates transfer to the final college at the end of counseling."
+  }
+]

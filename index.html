@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>TNEA GPT — Your Engineering Admissions Counselor</title>
+    <link rel="icon" href="/assets/logo.jpeg" type="image/jpeg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="/assets/styles.css">
+    <style>
+        /* Watermark */
+        .app-shell {
+            position: relative;
+        }
+        #chatContainer {
+            position: relative;
+        }
+        #chatContainer::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            height: 320px;
+            background-image: url('/assets/logo.jpeg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.07;
+            pointer-events: none;
+            z-index: 0;
+            border-radius: 50%;
+        }
+        #chatContainer > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Clean prominent chat input box */
+        .input-area {
+            position: fixed;
+            bottom: 0;
+            left: 280px;
+            right: 0;
+            padding: 16px 18% 20px 18%;
+            background: linear-gradient(to top, var(--bg-main) 85%, transparent);
+            z-index: 100;
+        }
+        @media (max-width: 868px) {
+            .input-area {
+                left: 0;
+                padding: 12px 16px 16px 16px;
+            }
+        }
+        .input-dock {
+            background: var(--bg-surface);
+            border: 2px solid var(--accent);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.18);
+            border-radius: 18px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .chat-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: inherit;
+            resize: none;
+            max-height: 120px;
+            padding: 6px 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-shell">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <div class="brand-icon">
+                        <img src="/assets/logo.jpeg" alt="Logo" class="brand-logo">
+                    </div>
+                    <div class="brand-text">
+                        <h1 class="brand-name">TNEA GPT</h1>
+                        <span class="brand-tag">Engineering Counselor</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-actions">
+                <button class="new-chat-btn" id="newChatBtn">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span>New Session</span>
+                </button>
+            </div>
+
+            <div class="sidebar-nav" id="sessionList">
+                <!-- Sessions populated by JS -->
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="dropdown-container" id="settingsContainer">
+                    <button class="sidebar-footer-btn dropdown-trigger">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Settings</span>
+                    </button>
+                    <div class="dropdown-menu bottom-up">
+                        <div class="dropdown-item">
+                            <span>Theme</span>
+                            <select id="themeSelect" class="theme-select">
+                                <option value="system">System</option>
+                                <option value="light">Light</option>
+                                <option value="dark">Dark</option>
+                            </select>
+                        </div>
+                        <button class="dropdown-item-btn" id="termsBtn"><i class="fa-solid fa-file-contract"></i> Terms of Use</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="main-area">
+            <!-- Header Bar -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="icon-btn toggle-sidebar-btn" id="toggleSidebar">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="header-brand">
+                        <div class="header-avatar">
+                            <img src="/assets/logo.jpeg" alt="TNEA GPT" class="header-logo">
+                            <span class="status-dot"></span>
+                        </div>
+                        <div class="header-info">
+                            <h2 class="header-title">TNEA GPT</h2>
+                            <span class="header-status">Online • Ready to help</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <div class="dropdown-container">
+                        <button class="icon-btn dropdown-trigger" title="More options">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
+                        <div class="dropdown-menu top-down">
+                            <button class="dropdown-item-btn text-danger" id="menuClearBtn">
+                                <i class="fa-regular fa-trash-can"></i> Delete Chat
+                            </button>
+                            <button class="dropdown-item-btn" id="menuShareBtn">
+                                <i class="fa-solid fa-share-nodes"></i> Share Chat
+                            </button>
+                            <button class="dropdown-item-btn" id="menuFullscreenBtn">
+                                <i class="fa-solid fa-expand"></i> Full Screen
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Chat Stream + Welcome -->
+            <div class="chat-area" id="chatContainer">
+                <!-- Welcome Screen (shown initially) -->
+                <div class="welcome-screen" id="welcomeScreen">
+                    <div class="welcome-glow"></div>
+                    <div class="welcome-content">
+                        <div class="welcome-logo-wrap">
+                            <img src="/assets/logo.jpeg" alt="TNEA GPT" class="welcome-logo">
+                            <div class="welcome-ring"></div>
+                        </div>
+                        <h1 class="welcome-title">TNEA GPT</h1>
+                        <p class="welcome-subtitle">Your intelligent companion for Tamil Nadu Engineering Admissions. Ask me about colleges, cutoffs, seat matrix, and more.</p>
+                        
+                        <div class="quick-actions" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Bar -->
+            <footer class="input-area">
+                <div class="input-wrapper">
+                    <div class="input-dock">
+                        <textarea id="userInput" class="chat-input" rows="1" placeholder="Ask about TNEA colleges, cutoffs, counseling..."></textarea>
+                        <button class="icon-btn mic-btn" id="micBtn" title="Voice Input">
+                            <i class="fa-solid fa-microphone"></i>
+                        </button>
+                        <button class="send-btn" id="sendBtn" title="Send Message">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <p class="input-hint">TNEA AI can make mistakes. Verify important information with official sources.</p>
+                </div>
+            </footer>
+        </main>
+    </div>
+    
+    <div id="toast" class="toast">Action completed!</div>
+    <script src="/assets/app.js"></script>
+</body>
+</html>
