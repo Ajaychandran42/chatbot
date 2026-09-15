@@ -144,12 +144,37 @@ def match_college(query: str, college_field: str, code_field: str = "") -> bool:
     for alias_key, targets in COLLEGE_ALIASES.items():
         if alias_key in q or q in alias_key:
             for t in targets:
-                if t == c_code or t in c_text:
+                if t.isdigit():
+                    # Numeric alias targets are college codes: match the passed
+                    # code or the trailing "(code)" in the college text — never a
+                    # bare substring (avoids matching "1" inside postcodes).
+                    if c_code and t == c_code:
+                        return True
+                    m = re.search(r'\((\d{1,4})\)\s*$', c_text)
+                    if m and m.group(1) == t:
+                        return True
+                elif t == c_code or t in c_text:
                     return True
+            # The query is an exact known alias (e.g. "MIT", "CEG") but none of
+            # its alias targets matched — the alias is authoritative, so stop
+            # here rather than false-matching a short token inside place names.
+            if q == alias_key:
+                return False
 
-    q_words = [w for w in re.split(r'[\s,.-]+', q) if len(w) > 1 and w not in ["college", "of", "engineering", "tech", "technology", "inst", "institute"]]
-    if q_words and all(w in c_text for w in q_words):
-        return True
+    # If the entire query is an exact alias key (e.g. "MIT", "CEG", "PSG"),
+    # the alias branch above is authoritative — do NOT fall through to generic
+    # word-substring matching, which can false-match short tokens inside place
+    # names (e.g. "mit" inside "kumittipathy").
+    if q not in COLLEGE_ALIASES:
+        q_words = [w for w in re.split(r'[\s,.-]+', q) if len(w) > 1 and w not in ["college", "of", "engineering", "tech", "technology", "inst", "institute"]]
+        if q_words and all(w in c_text for w in q_words):
+            return True
+
+    # Final fallback. Avoid bare substring matching for pure-numeric queries,
+    # otherwise a code like "1" matches the "1" inside any postcode/address.
+    if q.isdigit():
+        m = re.search(r'\((\d{1,4})\)\s*$', c_text)
+        return bool(m and m.group(1) == q)
 
     return q in c_text
 

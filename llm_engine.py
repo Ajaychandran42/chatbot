@@ -34,7 +34,7 @@ SYSTEM_PROMPT = """
 You are "TNEA GPT", the official Admissions AI Counselor for Tamil Nadu Engineering Admissions.
 
 STRICT MANDATES:
-1. THE GREETING RULE: If the user inputs a simple greeting, reply with exactly ONE short sentence. Do NOT introduce your full name or capabilities unless asked.
+1. THE GREETING RULE: If the user inputs a simple greeting (hi, hello, hey), reply with exactly ONE short sentence and do NOT introduce your full name or capabilities. If the user says thanks/thank you, reply with a brief polite acknowledgment ("You're welcome!") — do NOT respond with "Hello! How can I assist you...". If the user says bye/goodbye, give a SHORT warm farewell.
 2. FORMAL & CONCISE: Use formal, professional English. Keep responses extremely simple and brief.
 3. DATA & TOOLS:
    - When asked for cutoffs, closing ranks, or eligibility, query the tools (`get_college_cutoffs`, `get_historical_cutoffs`, `predict_colleges`, `search_colleges`, `get_seat_matrix`).
@@ -173,16 +173,33 @@ def stream_chat(user_message: str, history: list):
                     chunk += ' '
                 yield _sse({"type": "token", "content": chunk})
         else:
-            # AI used all tool rounds without producing text — force one last streaming call
+            # AI used all tool rounds without producing text — force one last
+            # non-streaming call with tool_choice="none" so it MUST answer from
+            # the tool results already collected (prevents empty responses).
             try:
-                stream = client.chat.completions.create(model=MODEL_NAME, messages=messages, stream=True)
-                for chunk in stream:
-                    if (chunk.choices and chunk.choices[0].delta
-                            and chunk.choices[0].delta.content):
-                        text = chunk.choices[0].delta.content
-                        yield _sse({"type": "token", "content": text})
+                fallback = client.chat.completions.create(
+                    model=MODEL_NAME, messages=messages,
+                    tools=TOOLS_SCHEMA, tool_choice="none"
+                )
+                final_text = (fallback.choices[0].message.content or "").strip()
+                # Some providers reject tool_choice="none" — retry without tools
+                if not final_text:
+                    fallback2 = client.chat.completions.create(
+                        model=MODEL_NAME, messages=messages
+                    )
+                    final_text = (fallback2.choices[0].message.content or "").strip()
             except Exception as stream_err:
-                yield _sse({"type": "error", "content": f"Failed to generate response: {str(stream_err)}"})
+                final_text = ""
+
+            if final_text:
+                words = final_text.split(' ')
+                for i in range(0, len(words), 4):
+                    chunk = ' '.join(words[i:i + 4])
+                    if i + 4 < len(words):
+                        chunk += ' '
+                    yield _sse({"type": "token", "content": chunk})
+            else:
+                yield _sse({"type": "error", "content": "The AI could not produce a response after several attempts. Please try rephrasing your question."})
 
         # Signal end of stream
         yield "data: [DONE]\n\n"
