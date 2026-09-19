@@ -10778,7 +10778,7 @@
       "anti_ragging_phone": "9789832134"
     },
     "general_info": {
-      "placement_percentage": 90,
+      "placement_percentage": null,
       "minority_status": "No",
       "autonomous_status": "Yes",
       "nearest_railway_station": "TAMBARAM",
@@ -13186,7 +13186,7 @@
       "anti_ragging_phone": "9790982759"
     },
     "general_info": {
-      "placement_percentage": 85,
+      "placement_percentage": null,
       "minority_status": "No",
       "autonomous_status": "yes",
       "nearest_railway_station": "TAMBARAM",
@@ -14550,7 +14550,7 @@
       "anti_ragging_phone": "9095109090"
     },
     "general_info": {
-      "placement_percentage": 100,
+      "placement_percentage": null,
       "minority_status": "Yes",
       "autonomous_status": "No",
       "nearest_railway_station": "MAMBALAM",

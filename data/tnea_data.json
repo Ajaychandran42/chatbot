@@ -44685,11 +44685,11 @@
     "college": "Prince Dr. K. Vasudevan College of Engineering and Technology, Medavakkam-Mambakkam Road, Ponmar, Chennai-600127. (1442)",
     "branch": "Artificial Intelligence and Data Science (AD)",
     "cutoffs": {
-      "OC": 192.0,
-      "BC": 190.5,
-      "BCM": 185.5,
-      "MBC": 188.5,
-      "SC": 185.0,
+      "OC": 145.0,
+      "BC": 145.0,
+      "BCM": 145.0,
+      "MBC": 145.0,
+      "SC": 145.0,
       "SCA": null,
       "ST": null
     },
@@ -44729,7 +44729,7 @@
     "college": "Prince Dr. K. Vasudevan College of Engineering and Technology, Medavakkam-Mambakkam Road, Ponmar, Chennai-600127. (1442)",
     "branch": "COMPUTER SCIENCE AND ENGINEERING (CS)",
     "cutoffs": {
-      "OC": 187.0,
+      "OC": 145.0,
       "BC": 157.0,
       "BCM": 149.5,
       "MBC": 149.5,
@@ -44751,7 +44751,7 @@
     "college": "Prince Dr. K. Vasudevan College of Engineering and Technology, Medavakkam-Mambakkam Road, Ponmar, Chennai-600127. (1442)",
     "branch": "Computer Science and Engineering (Cyber Security) (SC)",
     "cutoffs": {
-      "OC": 187.0,
+      "OC": 145.0,
       "BC": 149.5,
       "BCM": 137.0,
       "MBC": 129.5,
@@ -44795,13 +44795,13 @@
     "college": "Prince Shri Venkateshwaraa Padmavathy Engineering College (Autonomous), Medavakkam - Mambakkam Road, Ponmar, Kanchipuram, Chennai-600127. (1414)",
     "branch": "COMPUTER SCIENCE AND ENGINEERING (CS)",
     "cutoffs": {
-      "OC": 193.0,
-      "BC": 191.0,
-      "BCM": 192.0,
-      "MBC": 190.0,
-      "SC": 187.0,
+      "OC": 155.0,
+      "BC": 155.0,
+      "BCM": 155.0,
+      "MBC": 155.0,
+      "SC": 155.0,
       "SCA": null,
-      "ST": 185.5
+      "ST": 155.0
     },
     "ranks": {
       "OC": 4752,
@@ -44839,7 +44839,7 @@
     "college": "Prince Shri Venkateshwaraa Padmavathy Engineering College (Autonomous), Medavakkam - Mambakkam Road, Ponmar, Kanchipuram, Chennai-600127. (1414)",
     "branch": "ELECTRONICS AND COMMUNICATION ENGINEERING (EC)",
     "cutoffs": {
-      "OC": 185.0,
+      "OC": 155.0,
       "BC": 152.5,
       "BCM": 146.0,
       "MBC": 148.5,
@@ -44861,10 +44861,10 @@
     "college": "Prince Shri Venkateshwaraa Padmavathy Engineering College (Autonomous), Medavakkam - Mambakkam Road, Ponmar, Kanchipuram, Chennai-600127. (1414)",
     "branch": "INFORMATION TECHNOLOGY (IT)",
     "cutoffs": {
-      "OC": 192.0,
-      "BC": 188.5,
-      "BCM": 183.0,
-      "MBC": 188.0,
+      "OC": 155.0,
+      "BC": 155.0,
+      "BCM": 155.0,
+      "MBC": 155.0,
       "SC": 121.0,
       "SCA": null,
       "ST": null

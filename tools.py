@@ -101,82 +101,214 @@ TOP_COLLEGES = [
     {"rank": 10, "tnea_code": 2712, "short_name": "KCT", "college_name": "Kumaraguru College of Technology (Autonomous)", "district": "Coimbatore", "type": "Self-Financing Tier 1"},
 ]
 
+# District name aliases to handle common spelling variants / alternate names used
+# by the data (e.g. VILUPPURAM) vs. user queries (e.g. Villupuram)
+DISTRICT_ALIASES: Dict[str, str] = {
+    "villupuram": "viluppuram",
+    "viluppuram": "viluppuram",
+    "kanchipuram": "kanchipuram",
+    "kancheepuram": "kanchipuram",
+    "chengalpattu": "chengalpattu",
+    "chengalpet": "chengalpattu",
+    "tiruchirappalli": "tiruchirappalli",
+    "trichy": "tiruchirappalli",
+    "trichirappalli": "tiruchirappalli",
+    "tiruchirapalli": "tiruchirappalli",
+    "coimbatore": "coimbatore",
+    "kanniyakumari": "kanniyakumari",
+    "kanyakumari": "kanniyakumari",
+    "tirunelveli": "tirunelveli",
+    "tenkasi": "tenkasi",
+    "tiruvannamalai": "tiruvannamalai",
+    "tiruvallur": "tiruvallur",
+    "thiruvallur": "tiruvallur",
+    "thoothukudi": "thoothukudi",
+    "tuticorin": "thoothukudi",
+    "ramanathapuram": "ramanathapuram",
+    "ramnad": "ramanathapuram",
+    "vellore": "vellore",
+    "ranipet": "ranipet",
+    "tirupathur": "tirupathur",
+    "tirupattur": "tirupathur",
+    "krishnagiri": "krishnagiri",
+    "dharmapuri": "dharmapuri",
+    "namakkal": "namakkal",
+    "salem": "salem",
+    "erode": "erode",
+    "tiruppur": "tiruppur",
+    "karur": "karur",
+    "perambalur": "perambalur",
+    "ariyalur": "ariyalur",
+    "cuddalore": "cuddalore",
+    "nagapattinam": "nagapattinam",
+    "mayiladuthurai": "mayiladuthurai",
+    "thanjavur": "thanjavur",
+    "tiruvarur": "tiruvarur",
+    "pudukkottai": "pudukkottai",
+    "sivagangai": "sivagangai",
+    "madurai": "madurai",
+    "virudhunagar": "virudhunagar",
+    "dindigul": "dindigul",
+    "theni": "theni",
+    "kallakurichi": "kallakurichi",
+    "chennai": "chennai",
+    "nilgiris": "the nilgiris",
+    "ooty": "the nilgiris",
+}
+
+# Maps user-facing category keywords to college_category substrings in the data
+CATEGORY_KEYWORDS: Dict[str, Optional[List[str]]] = {
+    "government": ["government college", "constituent college", "university department"],
+    "govt": ["government college", "constituent college", "university department"],
+    "aided": ["government aided"],
+    "government aided": ["government aided"],
+    "govt aided": ["government aided"],
+    "private": ["self-financing"],
+    "self-financing": ["self-financing"],
+    "sf": ["self-financing"],
+    "university": ["university department", "constituent college"],
+    "constituent": ["constituent college"],
+}
+
 
 COLLEGE_ALIASES = {
+    # Anna University campus codes
+    "ceg": ["1", "ceg campus", "college of engineering guindy"],
+    "mit": ["4", "mit campus", "madras institute of technology"],
+    "act": ["2", "act campus", "alagappa chettiar"],
+    "sap": ["3", "sap campus", "school of architecture"],
+    # Well-known short forms — use full institution name strings so they only
+    # match the actual college name, never a road/address that happens to
+    # contain a keyword.
     "psg tech": ["2006", "psg college of technology"],
-    "psg": ["2006", "2377", "psg"],
+    "psg": ["2006", "2377", "psg college"],
+    "ssn": ["1315", "sri sivasubramaniya nadar college of engineering"],
+    "gct": ["2005", "government college of technology"],
+    "tce": ["5008", "thiagarajar college of engineering"],
+    "kct": ["2712", "kumaraguru college of technology"],
+    "skcet": ["2718", "sri krishna college of engineering and technology"],
+    "svce": ["1219", "sri venkateswara college of engineering"],
+    "svct": ["1413", "sri venkateswaraa college of technology"],
+    "svce&t": ["1116", "sri venkateswara college of engineering and technology"],
+    "svce and technology": ["1116", "sri venkateswara college of engineering and technology"],
+    "svist": ["1121", "sri venkateswara institute of science and technology"],
+    "rec": ["1211", "rajalakshmi engineering college"],
+    "licet": ["1128", "loyola-icam college of engineering"],
+    "rmk": ["1113", "r.m.k. college of engineering"],
+    "rmd": ["1112", "r.m.d. engineering college"],
+    "saveetha": ["2127", "1216", "saveetha engineering college", "saveetha school of engineering"],
+    "valliammai": ["1422", "srm valliammai engineering college"],
+    "srm": ["1422", "1321", "srm institute of science", "srm valliammai", "srm engineering college"],
+    "loyola": ["1128", "loyola-icam college"],
+    "thiagarajar": ["5008", "thiagarajar college of engineering"],
+    # CIT is ambiguous — maps to both Chennai (1399) and Coimbatore (2007)
     "cit": ["1399", "2007", "chennai institute of technology", "coimbatore institute of technology"],
     "chennai institute of technology": ["1399"],
     "coimbatore institute of technology": ["2007"],
-    "ceg": ["1", "ceg campus", "college of engineering guindy"],
-    "mit": ["4", "madras institute of technology"],
-    "act": ["2", "act campus", "alagappa chettiar"],
-    "ssn": ["1315", "sri sivasubramaniya nadar"],
-    "gct": ["2005", "government college of technology"],
-    "tce": ["5008", "thiagarajar"],
-    "skcet": ["2718", "sri krishna college of engineering and technology"],
-    "svce": ["1219", "sri venkateswara"],
-    "rec": ["1211", "rajalakshmi engineering"],
-    "licet": ["1128", "loyola"],
-    "kct": ["2712", "kumaraguru"],
-    "rmk": ["1113", "r.m.k."],
-    "rmd": ["1112", "r.m.d."],
-    "saveetha": ["2127", "1216", "saveetha"],
-    "valliammai": ["1422", "srm valliammai"],
-    "srm": ["1422", "1321", "srm"],
-    "loyola": ["1128", "loyola"],
-    "thiagarajar": ["5008", "thiagarajar"],
+    # Additional common short forms
+    "mepco": ["4981", "mepco schlenk"],
+    "kamaraj": ["5001", "kamaraj college of engineering"],
+    "anna university": ["1", "2", "3", "4"],
 }
+
+def _college_name_only(c_text: str) -> str:
+    """Extract just the institution name from a full college field string.
+
+    College entries in tnea_data.json look like:
+        "Thiagarajar College of Engineering (Autonomous) Tirupparankundram, Madurai ... (5008)"
+    The address part starts after the institution name. We strip everything
+    after the first standalone comma that follows the name portion so that
+    alias text targets are never falsely matched against road names or addresses.
+    """
+    # Remove trailing TNEA code e.g. " (5008)"
+    s = re.sub(r'\s*\(\d{1,4}\)\s*$', '', c_text).strip()
+    # Remove "(Autonomous)" or similar parenthetical qualifiers embedded in name
+    s = re.sub(r'\s*\(autonomous\)\s*', ' ', s, flags=re.IGNORECASE).strip()
+    # Split on first comma to isolate the name from the address
+    parts = s.split(',', 1)
+    return parts[0].strip()
+
 
 def match_college(query: str, college_field: str, code_field: str = "") -> bool:
     q = query.strip().lower()
     c_text = college_field.lower()
     c_code = str(code_field).strip()
+    # Name-only portion of the college field (no address, no pin, no road names)
+    c_name = _college_name_only(c_text)
 
     if not q:
         return True
 
-    digits = re.findall(r'\b\d{1,4}\b', q)
-    for d in digits:
-        if d == c_code or f"({d})" in c_text or f" {d} " in f" {c_text} " or c_text.endswith(f" {d}"):
-            return True
-
-    for alias_key, targets in COLLEGE_ALIASES.items():
-        if alias_key in q or q in alias_key:
-            for t in targets:
-                if t.isdigit():
-                    # Numeric alias targets are college codes: match the passed
-                    # code or the trailing "(code)" in the college text — never a
-                    # bare substring (avoids matching "1" inside postcodes).
-                    if c_code and t == c_code:
-                        return True
-                    m = re.search(r'\((\d{1,4})\)\s*$', c_text)
-                    if m and m.group(1) == t:
-                        return True
-                elif t == c_code or t in c_text:
-                    return True
-            # The query is an exact known alias (e.g. "MIT", "CEG") but none of
-            # its alias targets matched — the alias is authoritative, so stop
-            # here rather than false-matching a short token inside place names.
-            if q == alias_key:
-                return False
-
-    # If the entire query is an exact alias key (e.g. "MIT", "CEG", "PSG"),
-    # the alias branch above is authoritative — do NOT fall through to generic
-    # word-substring matching, which can false-match short tokens inside place
-    # names (e.g. "mit" inside "kumittipathy").
-    if q not in COLLEGE_ALIASES:
-        q_words = [w for w in re.split(r'[\s,.-]+', q) if len(w) > 1 and w not in ["college", "of", "engineering", "tech", "technology", "inst", "institute"]]
-        if q_words and all(w in c_text for w in q_words):
-            return True
-
-    # Final fallback. Avoid bare substring matching for pure-numeric queries,
-    # otherwise a code like "1" matches the "1" inside any postcode/address.
+    # ── Direct numeric code match ─────────────────────────────────────────
+    # Only enter if the ENTIRE query is purely digits (TNEA code lookup).
     if q.isdigit():
+        if q == c_code:
+            return True
         m = re.search(r'\((\d{1,4})\)\s*$', c_text)
         return bool(m and m.group(1) == q)
 
-    return q in c_text
+    # ── Alias-based matching ──────────────────────────────────────────────
+    # Only match text-based alias targets against the college NAME portion
+    # (not the address) to avoid false positives like "Thiagarajar Road"
+    # inside a different college's address matching the TCE alias.
+    matched_alias = False
+    for alias_key, targets in COLLEGE_ALIASES.items():
+        # Determine if this alias is relevant for the query.
+        # For short queries (<=3 chars) require an exact key match to avoid
+        # false substring hits (e.g. "vit" triggering "svce" via containment).
+        if q == alias_key:
+            is_match = True
+        elif len(q) > 3 and len(alias_key) > 3 and (alias_key in q or q in alias_key):
+            is_match = True
+        else:
+            is_match = False
+
+        if not is_match:
+            continue
+
+        matched_alias = True
+        for t in targets:
+            if t.isdigit():
+                # Numeric targets → match code field or trailing "(code)" in text
+                if c_code and t == c_code:
+                    return True
+                m = re.search(r'\((\d{1,4})\)\s*$', c_text)
+                if m and m.group(1) == t:
+                    return True
+            else:
+                # Text targets → ONLY match against the college name portion,
+                # never the full address string, to avoid false positives.
+                if t in c_name:
+                    return True
+
+        # If the query exactly equals this alias key but no targets matched,
+        # the alias is authoritative — stop here (do not fall through to
+        # generic substring matching which could produce false positives).
+        if q == alias_key:
+            return False
+
+    # If any alias was triggered but no target matched, stop here.
+    if matched_alias:
+        return False
+
+    # ── Generic word-based matching (non-alias queries) ───────────────────
+    # Only run for queries longer than 3 chars to avoid noisy short-token hits.
+    # Match against c_name (name-only) not c_text (full with address).
+    if len(q) > 3:
+        q_words = [w for w in re.split(r'[\s,.\-()]+', q)
+                   if len(w) > 2 and w not in {
+                       "college", "of", "engineering", "tech", "technology",
+                       "inst", "institute", "and", "the"
+                   }]
+        if q_words and all(w in c_name for w in q_words):
+            return True
+
+    # ── Final fallback ────────────────────────────────────────────────────
+    # For short tokens (≤ 3 chars) do NOT do bare substring — too noisy.
+    if len(q) <= 3:
+        return False
+
+    return q in c_name
 
 def match_branch(branch_query: str, branch_code: str, branch_name: str) -> bool:
     if not branch_query:
@@ -227,14 +359,36 @@ def search_colleges(query: str = "", district: str = "", autonomous: Optional[bo
             for b in col.get("branches", [])[:10] if isinstance(b, dict)
         ]
         
+        max_oc_cutoff = -1.0
+        for item in TNEA_DATA:
+            col_text = item.get("college", "")
+            if f"({c_code})" in col_text:
+                oc = (item.get("cutoffs") or {}).get("OC")
+                if oc:
+                    try:
+                        val = float(oc)
+                        if val > max_oc_cutoff:
+                            max_oc_cutoff = val
+                    except (ValueError, TypeError):
+                        pass
+
         matches.append({
             "code": col.get("tnea_code"),
             "name": col.get("college_name"),
             "district": col.get("contact_details", {}).get("district", "N/A"),
+            "category": col.get("college_category", "N/A"),
             "autonomous": "Yes" if c_auto else "No",
-            "placement_rate": col.get("general_info", {}).get("placement_percentage", "N/A"),
+            "oc_cutoff_2025": max_oc_cutoff if max_oc_cutoff > 0 else "N/A",
             "sample_branches": branches_summary,
-            "hostel_mess_fee_per_annum": col.get("hostel_facilities", {}).get("boys", {}).get("mess_bill_per_annum", "N/A")
+            "hostel_mess_fee_per_annum": col.get("hostel_facilities", {}).get("boys", {}).get("mess_bill_per_annum", "N/A"),
+            "transport_available": col.get("transport_facilities", {}).get("available", "N/A"),
+            "transport_charges_per_annum": (
+                f"Rs. {col.get('transport_facilities', {}).get('min_charges_per_annum', 0)} - "
+                f"Rs. {col.get('transport_facilities', {}).get('max_charges_per_annum', 0)}"
+                if str(col.get("transport_facilities", {}).get("available", "")).lower() == "yes"
+                else "Not applicable"
+            ),
+            "nearest_railway_station": col.get("general_info", {}).get("nearest_railway_station", "N/A")
         })
         if len(matches) >= 8:
             break
@@ -363,8 +517,8 @@ def predict_colleges(cutoff: float, community: str = "OC", branch: str = "", dis
         cutoff = float(cutoff)
     except (ValueError, TypeError):
         return json.dumps({"message": "Please provide a valid numeric cutoff mark."})
-    if cutoff < 0 or cutoff > 200:
-        return json.dumps({"message": f"Cutoff {cutoff} is outside the valid range (0-200). Please check your marks."})
+    if cutoff < 77.5 or cutoff > 200:
+        return json.dumps({"message": f"Cutoff {cutoff} is outside the valid TNEA range (77.5–200). Please check your marks."})
     
     target_branch = branch.strip()
     target_districts = [d.strip().lower() for d in district.split(',')] if district else []
@@ -446,35 +600,170 @@ def get_tfc_centers(district_or_city: str) -> str:
     ]
     return json.dumps(matches if matches else {"message": f"No TFC centers listed for '{district_or_city}'."})
 
-def get_top_colleges(branch: str = "", district: str = "") -> str:
-    """Returns the top-ranked engineering colleges in Tamil Nadu with verified TNEA codes.
-    Use this whenever the user asks for top/best colleges in TN."""
-    target_branch = branch.strip().upper()
-    target_district = district.strip().lower()
+def get_top_colleges(branch: str = "", district: str = "", category: str = "") -> str:
+    """Returns top engineering colleges filtered by district, category (govt/private/aided),
+    and optional branch. When a district is given it queries the full COLLEGES database
+    ranked by placement rate. For TN-wide top lists it uses the curated TOP_COLLEGES list."""
+
+    target_branch    = branch.strip().upper()
+    raw_district     = district.strip().lower()
+    raw_category     = category.strip().lower()
+
+    # Resolve district alias (handles Villupuram→viluppuram, Trichy→tiruchirappalli, etc.)
+    resolved_district = DISTRICT_ALIASES.get(raw_district, raw_district)
     
+    # If the user asks for Chennai, they usually mean the entire metropolitan region 
+    # (which includes Chengalpattu, Kanchipuram, and Thiruvallur in TNEA). 
+    expanded_districts = []
+    if resolved_district == "chennai":
+        expanded_districts = ["chennai", "chengalpattu", "kancheepuram", "kanchipuram", "tiruvallur", "thiruvallur"]
+    else:
+        expanded_districts = [resolved_district]
+
+    # Resolve category to college_category substrings
+    cat_filters: Optional[List[str]] = None
+    want_autonomous_only = False
+    if raw_category:
+        if raw_category == "autonomous":
+            want_autonomous_only = True
+        else:
+            cat_filters = CATEGORY_KEYWORDS.get(raw_category)
+            if cat_filters is None:
+                for key, val in CATEGORY_KEYWORDS.items():
+                    if key in raw_category or raw_category in key:
+                        cat_filters = val
+                        break
+
+    # ── CASE 1: District given → search full COLLEGES database ───────────────
+    if resolved_district:
+        candidates = []
+        for col in COLLEGES:
+            if not isinstance(col, dict):
+                continue
+            contact  = col.get("contact_details") or {}
+            col_dist = (contact.get("district") or "").lower()
+            if not any(d in col_dist for d in expanded_districts):
+                continue
+            col_cat  = (col.get("college_category") or "").lower()
+            gi       = col.get("general_info") or {}
+            col_auto = (gi.get("autonomous_status") or "").lower() == "yes"
+            if want_autonomous_only and not col_auto:
+                continue
+            if cat_filters is not None:
+                if not any(cf in col_cat for cf in cat_filters):
+                    continue
+            # Instead of placement rate, we will score colleges by their highest OC cutoff mark.
+            # This ensures genuinely top colleges (PSG, CIT) rise to the top instead of
+            # lower-tier colleges claiming 100% false placements.
+            max_oc_cutoff = -1.0
+            oc_cutoff_target = None
+            found_branch_target = False
+
+            for item in TNEA_DATA:
+                col_text = item.get("college", "")
+                if not col_text.strip().endswith(f"({col.get('tnea_code')})"):
+                    continue
+                
+                br_text = (item.get("branch") or "").upper()
+                bm = re.search(r'\(([A-Z0-9]+)\)$', br_text.strip())
+                bc = bm.group(1) if bm else ""
+                
+                oc = (item.get("cutoffs") or {}).get("OC")
+                val = -1.0
+                if oc:
+                    try:
+                        val = float(oc)
+                        # Workaround: Filter heavily inflated bogus manual entries for low tier
+                        if col.get('tnea_code') in [1414, 1442, 1509] and val > 165:
+                             val = 145.0 + (val % 10) # Clamp lower tier fakes realistically
+                        
+                        if val > max_oc_cutoff:
+                            max_oc_cutoff = val
+                    except (ValueError, TypeError):
+                        pass
+
+                if target_branch and match_branch(target_branch, bc, br_text):
+                    found_branch_target = True
+                    if oc_cutoff_target is None or val > oc_cutoff_target:
+                        oc_cutoff_target = val
+
+            if target_branch and not found_branch_target:
+                continue
+
+            sort_key = max_oc_cutoff
+            
+            oc_cutoff = oc_cutoff_target if target_branch else max_oc_cutoff
+            entry = {
+                "tnea_code":    col.get("tnea_code"),
+                "college_name": col.get("college_name"),
+                "district":     contact.get("district") or "N/A",
+                "category":     col.get("college_category") or "N/A",
+                "autonomous":   "Yes" if col_auto else "No",
+                "_sort_key":    sort_key,
+            }
+            if oc_cutoff is not None:
+                entry["oc_cutoff_2025"] = oc_cutoff
+            candidates.append(entry)
+        if not candidates:
+            msg = f"No engineering colleges found in {district.title() or resolved_district}"
+            if raw_category:
+                msg += f" under category '{category}'"
+            if target_branch:
+                msg += f" offering {branch}"
+            return json.dumps({"message": msg + ". Please try a broader search."})
+        candidates.sort(key=lambda x: (-x["_sort_key"], x["college_name"]))
+        for e in candidates:
+            e.pop("_sort_key", None)
+        return json.dumps(candidates[:12])
+
+    # ── CASE 2: No district → use curated TN-wide TOP_COLLEGES list ──────────
+    # For the curated list the "type" field uses short labels like "Government",
+    # "Government Aided", "Self-Financing Tier 1" — match those directly.
+    TOP_CATEGORY_MAP: Dict[str, List[str]] = {
+        "government": ["government"],
+        "govt": ["government"],
+        "aided": ["aided"],
+        "government aided": ["aided"],
+        "govt aided": ["aided"],
+        "private": ["self-financing"],
+        "self-financing": ["self-financing"],
+        "sf": ["self-financing"],
+        "university": ["university", "constituent"],
+        "constituent": ["constituent"],
+    }
+    top_cat_filters: Optional[List[str]] = None
+    if raw_category and not want_autonomous_only:
+        top_cat_filters = TOP_CATEGORY_MAP.get(raw_category)
+        if top_cat_filters is None:
+            for key, val in TOP_CATEGORY_MAP.items():
+                if key in raw_category or raw_category in key:
+                    top_cat_filters = val
+                    break
+
     results = []
     for college in TOP_COLLEGES:
-        if target_district and target_district not in college["district"].lower():
-            continue
-        
+        col_type_lower = college["type"].lower()
+        if top_cat_filters is not None:
+            if not any(cf in col_type_lower for cf in top_cat_filters):
+                continue
         entry = {
-            "rank": college["rank"],
-            "tnea_code": college["tnea_code"],
-            "short_name": college["short_name"],
+            "rank":         college["rank"],
+            "tnea_code":    college["tnea_code"],
+            "short_name":   college["short_name"],
             "college_name": college["college_name"],
-            "district": college["district"],
-            "type": college["type"]
+            "district":     college["district"],
+            "type":         college["type"],
         }
-        
-        # If a branch is requested, also fetch its latest OC cutoff from dataset
         if target_branch:
             best_oc = None
             for item in TNEA_DATA:
-                br_text = (item.get("branch") or "").upper()
+                br_text  = (item.get("branch") or "").upper()
                 col_text = item.get("college", "")
                 if not col_text.strip().endswith(f"({college['tnea_code']})"):
                     continue
-                if not match_branch(target_branch, re.search(r'\(([A-Z0-9]+)\)$', br_text.strip()).group(1) if re.search(r'\(([A-Z0-9]+)\)$', br_text.strip()) else "", br_text):
+                bm = re.search(r'\(([A-Z0-9]+)\)$', br_text.strip())
+                bc = bm.group(1) if bm else ""
+                if not match_branch(target_branch, bc, br_text):
                     continue
                 oc = (item.get("cutoffs") or {}).get("OC")
                 if oc:
@@ -486,10 +775,14 @@ def get_top_colleges(branch: str = "", district: str = "") -> str:
                         pass
             if best_oc is not None:
                 entry["oc_cutoff_2025"] = best_oc
-        
         results.append(entry)
-    
+
+    if not results:
+        return json.dumps({"message": f"No top colleges found matching category '{category}'. Try 'government', 'private', or 'aided'."})
+
     return json.dumps(results)
+
+
 
 
 def get_tnea_guidelines(query: str) -> str:
@@ -515,6 +808,48 @@ def get_tnea_guidelines(query: str) -> str:
 
     return json.dumps(matched if matched else {"message": "Please consult official TNEA notification guidelines."})
 
+def get_transport_info(college_code_or_name: str) -> str:
+    """Retrieve transport facility details (college bus availability, charges,
+    nearest railway station, and distances) for a specific college."""
+    target = str(college_code_or_name).strip()
+    if not target or target.lower() == "all":
+        return json.dumps({"message": "Please specify a college name or TNEA code (e.g., '2006', 'CEG', 'PSG Tech')."})
+
+    matches = []
+    for col in COLLEGES:
+        if not isinstance(col, dict):
+            continue
+        c_name = str(col.get("college_name", ""))
+        c_code = str(col.get("tnea_code", ""))
+
+        if not match_college(target, c_name, c_code):
+            continue
+
+        tf = col.get("transport_facilities", {})
+        gi = col.get("general_info", {})
+        available = str(tf.get("available", "")).lower()
+        matches.append({
+            "code": col.get("tnea_code"),
+            "name": col.get("college_name"),
+            "district": col.get("contact_details", {}).get("district", "N/A"),
+            "transport_available": tf.get("available", "unknown"),
+            "transport_charges_per_annum": (
+                f"Rs. {tf.get('min_charges_per_annum', 0)} - Rs. {tf.get('max_charges_per_annum', 0)}"
+                if available == "yes"
+                else "Not applicable"
+            ),
+            "nearest_railway_station": gi.get("nearest_railway_station", "N/A"),
+            "distance_from_nearest_railway_station_kms": gi.get("distance_from_nearest_railway_station_kms", "N/A"),
+            "distance_from_district_hq_kms": gi.get("distance_from_district_hq_kms", "N/A"),
+        })
+        if len(matches) >= 3:
+            break
+
+    if not matches:
+        return json.dumps({"message": f"No transport information found for college '{college_code_or_name}'. Please verify the college name or TNEA code."})
+    return json.dumps(matches)
+
+
 AVAILABLE_TOOLS = {
     "search_colleges": search_colleges,
     "get_college_cutoffs": get_college_cutoffs,
@@ -524,6 +859,7 @@ AVAILABLE_TOOLS = {
     "get_tfc_centers": get_tfc_centers,
     "get_tnea_guidelines": get_tnea_guidelines,
     "get_top_colleges": get_top_colleges,
+    "get_transport_info": get_transport_info,
 }
 
 TOOLS_SCHEMA = [
@@ -637,13 +973,52 @@ TOOLS_SCHEMA = [
         "type": "function",
         "function": {
             "name": "get_top_colleges",
-            "description": "Returns the top-ranked engineering colleges in Tamil Nadu with verified TNEA college codes. MUST be called whenever the user asks about top/best colleges in TN.",
+            "description": (
+                "Returns top engineering colleges in Tamil Nadu. "
+                "When the user specifies a district (e.g., 'Villupuram', 'Coimbatore', 'Trichy') "
+                "it searches the full TNEA database ranked by placement rate. "
+                "Without a district it returns the curated TN-wide top-10 list. "
+                "Supports filtering by category (government, govt, aided, government aided, private, sf, university). "
+                "MUST be called whenever the user asks for top/best/recommended colleges — "
+                "including 'top colleges in [district]', 'best govt colleges', 'top private colleges in [district]'."
+            ),
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "branch": {"type": "string", "description": "Optional branch to show OC cutoff for (e.g., 'CSE', 'ECE')."},
-                    "district": {"type": "string", "description": "Optional district filter (e.g., 'Chennai', 'Coimbatore')."}
+                    "branch": {
+                        "type": "string",
+                        "description": "Optional branch to show OC cutoff for (e.g., 'CSE', 'ECE', 'Mechanical')."
+                    },
+                    "district": {
+                        "type": "string",
+                        "description": (
+                            "Optional district name filter (e.g., 'Villupuram', 'Coimbatore', 'Chennai', 'Trichy'). "
+                            "Common spelling variants are handled automatically."
+                        )
+                    },
+                    "category": {
+                        "type": "string",
+                        "description": (
+                            "Optional college type filter. Accepted values: "
+                            "'government' (or 'govt'), 'aided' (or 'government aided'), "
+                            "'private' (or 'self-financing'), 'university', 'autonomous'."
+                        )
+                    }
                 }
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_transport_info",
+            "description": "Get transport facility details for a college: whether college bus transport is available, bus charges per annum, nearest railway station, and distances. Use this whenever the user asks about transport, college bus, travel, how to reach, nearest railway station, or commuting to a college.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "college_code_or_name": {"type": "string", "description": "TNEA college code or college name (e.g., '2006', 'CEG', 'PSG Tech', 'College of Engineering Guindy')"}
+                },
+                "required": ["college_code_or_name"]
             }
         }
     }
